@@ -422,34 +422,10 @@
       border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;
     }
 
-/* HP dalam mode "Situs Desktop" (viewport kecil tapi user-agent desktop) */
-@media (max-width: 900px) and (min-aspect-ratio: 4/5) {
-    
-    .board {
-        width: 90vmin !important;
-        height: 90vmin !important;
-        max-width: 350px !important;
-        max-height: 350px !important;
-    }
-
-    .board .cell,
-    .board .corner {
-        font-size: 0.7vmin !important;
-        padding: 0.2vmin !important;
-        border-width: 0.15vmin !important;
-    }
-
-    .color-bar {
-        height: 1vmin !important;
-    }
-
-    .property {
-        padding-bottom: 0.8vmin !important;
-    }
-
-    .token {
-        font-size: 2vmin !important;
-    }
+.board {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
   </style>
 
