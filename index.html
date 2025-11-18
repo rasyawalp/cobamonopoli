@@ -143,7 +143,6 @@
 }
 
 /* ======== WRAPPER GAME ======== */
-/* ======== WRAPPER GAME ======== */
 #gameWrapper {
     display: none;
     flex-direction: row;
@@ -421,6 +420,45 @@
       text-align: center; margin-top: 30px; font-size: 0.9rem;
       border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;
     }
+
+@media (min-width: 768px) {
+
+    /* BOARD mengecil sedikit */
+    .board {
+        width: 70vmin;
+        height: 70vmin;
+        max-width: 520px;
+        max-height: 520px;
+    }
+
+    /* TILE mengecil */
+    .cell {
+        font-size: 0.9vmin;
+        padding: 0.25vmin;
+        border-width: 0.2vmin;
+    }
+
+    .corner {
+        font-size: 1.2vmin;
+        border-width: 0.2vmin !important;
+    }
+
+    .color-bar {
+        height: 1.5vmin;
+    }
+
+    .property {
+        padding-bottom: 1vmin;
+    }
+
+    .token {
+        font-size: 2.2vmin;
+    }
+
+    #rollBtn {
+        font-size: 1.8vmin;
+    }
+}
   </style>
 
   <script>
