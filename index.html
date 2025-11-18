@@ -300,37 +300,54 @@ body {
     z-index: 20;
 }
 
-/* ==================== MOBILE MODE (HUD pindah ke tengah) ==================== */
+/* ======================================================
+   FIXED GAME CANVAS — seluruh permainan dalam satu kotak
+====================================================== */
+
+#gameCanvas {
+    position: relative;
+    width: 900px;       /* ukuran FIX board */
+    height: 900px;
+    margin: 0 auto;     /* selalu tengah */
+    overflow: visible;
+    transform-origin: top center;
+    background: transparent; 
+}
+
+/* SCALE RESPONSIVE — kecilkan kotak game jika layar terlalu kecil */
+@media (max-width: 1000px) {
+    #gameCanvas { transform: scale(0.9); }
+}
+@media (max-width: 900px) {
+    #gameCanvas { transform: scale(0.8); }
+}
+@media (max-width: 800px) {
+    #gameCanvas { transform: scale(0.7); }
+}
 @media (max-width: 700px) {
+    #gameCanvas { transform: scale(0.6); }
+}
+@media (max-width: 600px) {
+    #gameCanvas { transform: scale(0.5); }
+}
+@media (max-width: 500px) {
+    #gameCanvas { transform: scale(0.45); }
+}
+@media (max-width: 420px) {
+    #gameCanvas { transform: scale(0.40); }
+}
 
-    #hudWrapper {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: auto;
+/* ======================================================
+   HUD tetap absolute mengacu ke board, bukan ke layar
+====================================================== */
 
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-    }
-
-    /* HUD di mobile tidak boleh absolute */
-    .playerHUD {
-        position: relative !important;
-        top: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        right: auto !important;
-
-        width: 110px;
-        font-size: 14px;
-        padding: 10px 14px;
-    }
+#hudWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 </style>
 </head>
@@ -362,143 +379,153 @@ body {
 <!-- =============== GAME WRAPPER ================== -->
 <div id="gameWrapper">
 
-<!-- BOARD -->
-<div class="board" id="board">
-    <div id="diceBox">🎲🎲</div>
-    <button id="rollBtn" onclick="rollDice()">Lempar Dadu</button>
+    <!-- =============== BOARD ================== -->
+    <div class="board" id="board">
 
-<div id="hudWrapper">
-    <!-- HUD PLAYER (UANG, ASET, UTANG) -->
-    <div class="playerHUD p1" id="hud1">P1<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
-    <div class="playerHUD p2" id="hud2">P2<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
-    <div class="playerHUD p3" id="hud3">P3<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
-    <div class="playerHUD p4" id="hud4">P4<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
-</div>
+        <!-- Tombol & dadu -->
+        <div id="diceBox">🎲🎲</div>
+        <button id="rollBtn" onclick="rollDice()">Lempar Dadu</button>
 
-<!-- BOARD -->
-<div class="corner cell" style="grid-column: 1; grid-row: 1;">BEBAS<br>KELILING</div>
+        <!-- ================= BOARD TILE START ================= -->
+        <div class="corner cell" style="grid-column: 1; grid-row: 1;">BEBAS<br>KELILING</div>
 
-<div class="cell property" style="grid-column: 2; grid-row: 1;">
-    <div class="color-bar brown"></div>Rumah Shasa
-</div>
+        <div class="cell property" style="grid-column: 2; grid-row: 1;">
+            <div class="color-bar brown"></div>Rumah Shasa
+        </div>
 
-<div class="cell" style="grid-column: 3; grid-row: 1;">Dana Umum</div>
+        <div class="cell" style="grid-column: 3; grid-row: 1;">Dana Umum</div>
 
-<div class="cell property" style="grid-column: 4; grid-row: 1;">
-    <div class="color-bar brown"></div>FX Sudirman
-</div>
+        <div class="cell property" style="grid-column: 4; grid-row: 1;">
+            <div class="color-bar brown"></div>FX Sudirman
+        </div>
 
-<div class="cell" style="grid-column: 5; grid-row: 1;">Lombok</div>
+        <div class="cell" style="grid-column: 5; grid-row: 1;">Lombok</div>
 
-<div class="cell property" style="grid-column: 6; grid-row: 1;">
-    <div class="color-bar lightblue"></div>Rumah Lana
-</div>
+        <div class="cell property" style="grid-column: 6; grid-row: 1;">
+            <div class="color-bar lightblue"></div>Rumah Lana
+        </div>
 
-<div class="cell property" style="grid-column: 7; grid-row: 1;">
-    <div class="color-bar lightblue"></div>Rumah Moreen
-</div>
+        <div class="cell property" style="grid-column: 7; grid-row: 1;">
+            <div class="color-bar lightblue"></div>Rumah Moreen
+        </div>
 
-<div class="cell" style="grid-column: 8; grid-row: 1;">Kesempatan</div>
+        <div class="cell" style="grid-column: 8; grid-row: 1;">Kesempatan</div>
 
-<div class="cell property" style="grid-column: 9; grid-row: 1;">
-    <div class="color-bar lightblue"></div>Rumah Nayla
-</div>
+        <div class="cell property" style="grid-column: 9; grid-row: 1;">
+            <div class="color-bar lightblue"></div>Rumah Nayla
+        </div>
 
-<div class="cell" style="grid-column: 10; grid-row: 1;">Raja Ampat</div>
+        <div class="cell" style="grid-column: 10; grid-row: 1;">Raja Ampat</div>
 
-<div class="corner cell" style="grid-column: 11; grid-row: 1;">AMBIL<br>ALIH</div>
+        <div class="corner cell" style="grid-column: 11; grid-row: 1;">AMBIL<br>ALIH</div>
 
-<div class="cell property" style="grid-column: 1; grid-row: 2;">
-    <div class="color-bar pink"></div>Rumah Kimmy
-</div>
+        <div class="cell property" style="grid-column: 1; grid-row: 2;">
+            <div class="color-bar pink"></div>Rumah Kimmy
+        </div>
 
-<div class="cell" style="grid-column: 1; grid-row: 3;">Kesempatan</div>
+        <div class="cell" style="grid-column: 1; grid-row: 3;">Kesempatan</div>
 
-<div class="cell property" style="grid-column: 1; grid-row: 4;">
-    <div class="color-bar pink"></div>Rumah Erine
-</div>
+        <div class="cell property" style="grid-column: 1; grid-row: 4;">
+            <div class="color-bar pink"></div>Rumah Erine
+        </div>
 
-<div class="cell property" style="grid-column: 1; grid-row: 5;">
-    <div class="color-bar pink"></div>Rumah Regie
-</div>
+        <div class="cell property" style="grid-column: 1; grid-row: 5;">
+            <div class="color-bar pink"></div>Rumah Regie
+        </div>
 
-<div class="cell" style="grid-column: 1; grid-row: 6;">Bali</div>
+        <div class="cell" style="grid-column: 1; grid-row: 6;">Bali</div>
 
-<div class="cell property" style="grid-column: 1; grid-row: 7;">
-    <div class="color-bar orange"></div>Kantor IDN
-</div>
+        <div class="cell property" style="grid-column: 1; grid-row: 7;">
+            <div class="color-bar orange"></div>Kantor IDN
+        </div>
 
-<div class="cell" style="grid-column: 1; grid-row: 8;">Bank</div>
+        <div class="cell" style="grid-column: 1; grid-row: 8;">Bank</div>
 
-<div class="cell property" style="grid-column: 1; grid-row: 9;">
-    <div class="color-bar orange"></div>Rumah Nachia
-</div>
+        <div class="cell property" style="grid-column: 1; grid-row: 9;">
+            <div class="color-bar orange"></div>Rumah Nachia
+        </div>
 
-<div class="cell property" style="grid-column: 1; grid-row: 10;">
-    <div class="color-bar orange"></div>Rumah Lily
-</div>
+        <div class="cell property" style="grid-column: 1; grid-row: 10;">
+            <div class="color-bar orange"></div>Rumah Lily
+        </div>
 
-<div class="corner cell" style="grid-column: 1; grid-row: 11;">PENJARA</div>
+        <div class="corner cell" style="grid-column: 1; grid-row: 11;">PENJARA</div>
 
-<div class="cell property" style="grid-column: 2; grid-row: 11;">
-    <div class="color-bar red"></div>Rumah Levi
-</div>
+        <div class="cell property" style="grid-column: 2; grid-row: 11;">
+            <div class="color-bar red"></div>Rumah Levi
+        </div>
 
-<div class="cell" style="grid-column: 3; grid-row: 11;">Kesempatan</div>
+        <div class="cell" style="grid-column: 3; grid-row: 11;">Kesempatan</div>
 
-<div class="cell property" style="grid-column: 4; grid-row: 11;">
-    <div class="color-bar red"></div>Teater JKT48
-</div>
+        <div class="cell property" style="grid-column: 4; grid-row: 11;">
+            <div class="color-bar red"></div>Teater JKT48
+        </div>
 
-<div class="cell property" style="grid-column: 5; grid-row: 11;">
-    <div class="color-bar red"></div>Rumah Ribka
-</div>
+        <div class="cell property" style="grid-column: 5; grid-row: 11;">
+            <div class="color-bar red"></div>Rumah Ribka
+        </div>
 
-<div class="cell" style="grid-column: 6; grid-row: 11;">Pajak Jalan</div>
+        <div class="cell" style="grid-column: 6; grid-row: 11;">Pajak Jalan</div>
 
-<div class="cell property" style="grid-column: 7; grid-row: 11;">
-    <div class="color-bar yellow"></div>Rumah Fritzy
-</div>
+        <div class="cell property" style="grid-column: 7; grid-row: 11;">
+            <div class="color-bar yellow"></div>Rumah Fritzy
+        </div>
 
-<div class="cell property" style="grid-column: 8; grid-row: 11;">
-    <div class="color-bar yellow"></div>Indonesia Arena
-</div>
+        <div class="cell property" style="grid-column: 8; grid-row: 11;">
+            <div class="color-bar yellow"></div>Indonesia Arena
+        </div>
 
-<div class="cell" style="grid-column: 9; grid-row: 11;">Dana Umum</div>
+        <div class="cell" style="grid-column: 9; grid-row: 11;">Dana Umum</div>
 
-<div class="cell property" style="grid-column: 10; grid-row: 11;">
-    <div class="color-bar yellow"></div>Rumah Aralie
-</div>
+        <div class="cell property" style="grid-column: 10; grid-row: 11;">
+            <div class="color-bar yellow"></div>Rumah Aralie
+        </div>
 
-<div class="corner cell" style="grid-column: 11; grid-row: 11;">GO</div>
+        <div class="corner cell" style="grid-column: 11; grid-row: 11;">GO</div>
 
-<div class="cell property" style="grid-column: 11; grid-row: 10;">
-    <div class="color-bar green"></div>Rumah Oline
-</div>
+        <div class="cell property" style="grid-column: 11; grid-row: 10;">
+            <div class="color-bar green"></div>Rumah Oline
+        </div>
 
-<div class="cell property" style="grid-column: 11; grid-row: 9;">
-    <div class="color-bar green"></div>Ice BSD
-</div>
+        <div class="cell property" style="grid-column: 11; grid-row: 9;">
+            <div class="color-bar green"></div>Ice BSD
+        </div>
 
-<div class="cell" style="grid-column: 11; grid-row: 8;">Kesempatan</div>
+        <div class="cell" style="grid-column: 11; grid-row: 8;">Kesempatan</div>
 
-<div class="cell property" style="grid-column: 11; grid-row: 7;">
-    <div class="color-bar green"></div>Rumah Nala
-</div>
+        <div class="cell property" style="grid-column: 11; grid-row: 7;">
+            <div class="color-bar green"></div>Rumah Nala
+        </div>
 
-<div class="cell property" style="grid-column: 11; grid-row: 6;">
-    <div class="color-bar darkblue"></div>Rumah Delynn
-</div>
+        <div class="cell property" style="grid-column: 11; grid-row: 6;">
+            <div class="color-bar darkblue"></div>Rumah Delynn
+        </div>
 
-<div class="cell property" style="grid-column: 11; grid-row: 5%;">
-    <div class="color-bar darkblue"></div>Rumah Trisha
-</div>
+        <div class="cell property" style="grid-column: 11; grid-row: 5;">
+            <div class="color-bar darkblue"></div>Rumah Trisha
+        </div>
 
-<div class="cell" style="grid-column: 11; grid-row: 4;">Dana Umum</div>
+        <div class="cell" style="grid-column: 11; grid-row: 4;">Dana Umum</div>
 
-<div class="cell" style="grid-column: 11; grid-row: 3;">Hadiah Pajak</div>
+        <div class="cell" style="grid-column: 11; grid-row: 3;">Hadiah Pajak</div>
 
-<div class="cell" style="grid-column: 11; grid-row: 2;">Pantai Parangtritis</div>
+        <div class="cell" style="grid-column: 11; grid-row: 2;">Pantai Parangtritis</div>
+
+        <!-- ================= BOARD TILE END ================= -->
+
+    </div>
+    <!-- =============== END BOARD ================== -->
+
+
+
+    <!-- =============== HUD (DI LUAR BOARD) ================== -->
+    <div id="hudWrapper">
+        <div class="playerHUD p1" id="hud1">P1<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
+        <div class="playerHUD p2" id="hud2">P2<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
+        <div class="playerHUD p3" id="hud3">P3<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
+        <div class="playerHUD p4" id="hud4">P4<br>💰uang 1500<br>🏠aset 0<br>💸utang 0</div>
+    </div>
+    <!-- =============== END HUD ================== -->
 
 </div>
 
