@@ -469,6 +469,25 @@
     font-size: 0.9vmin !important;
     border-width: 0.2vmin !important;
 }
+
+/* Paksa tile kanan tdk keluar */
+.board .cell,
+.board .corner {
+    overflow: hidden !important;   /* apapun yang keluar → dipotong */
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
+/* Amankan isi tile supaya tidak melebar */
+.property, .corner, .color-bar {
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
+.board {
+    grid-auto-columns: 1fr !important;
+}
+
   </style>
 
   <script>
