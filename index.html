@@ -377,6 +377,23 @@
     transform: scale(1.03);
 }
 
+/* 🎯 RESPONSIVE HUD - Mobile Mode */
+@media (max-width: 768px) {
+    .playerHUD {
+        width: 65px;
+        font-size: 10px;
+        padding: 6px 8px;
+        line-height: 1.1;
+        border-radius: 8px;
+        transform: scale(0.9); /* sedikit mengecil */
+    }
+
+    .playerHUD.p1 { top: 45px; left: 45px; }
+    .playerHUD.p2 { top: 45px; right: 45px; }
+    .playerHUD.p3 { bottom: 45px; left: 45px; }
+    .playerHUD.p4 { bottom: 45px; right: 45px; }
+}
+
 /* ====== BINTANG DI TILE TIDAK MERUSAK LAYOUT ====== */
 .star {
     position: absolute;
@@ -1264,8 +1281,18 @@ function moveTokenTo(tile, token) {
     const r = target.getBoundingClientRect();
     const b = board.getBoundingClientRect();
 
-    token.style.left = (r.left - b.left + r.width / 2 - 19) + "px";
-    token.style.top = (r.top - b.top + r.height / 2 - 17) + "px";
+    // offset default (desktop)
+    let offsetX = -19;
+    let offsetY = -17;
+
+    // 📱 offset khusus HP
+    if (window.innerWidth < 768) {
+        offsetX = -14; // geser kanan
+        offsetY = -17;
+    }
+
+    token.style.left = (r.left - b.left + r.width / 2 + offsetX) + "px";
+    token.style.top =  (r.top  - b.top  + r.height / 2 + offsetY) + "px";
 }
 
 
@@ -2877,7 +2904,3 @@ function closeRouletteResult() {
 </script>
 </body>
 </html>
-
-
-
-
