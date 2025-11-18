@@ -377,6 +377,23 @@
     transform: scale(1.03);
 }
 
+/* 🎯 RESPONSIVE HUD - Mobile Mode */
+@media (max-width: 768px) {
+    .playerHUD {
+        width: 65px;
+        font-size: 10px;
+        padding: 6px 8px;
+        line-height: 1.1;
+        border-radius: 8px;
+        transform: scale(0.9); /* sedikit mengecil */
+    }
+
+    .playerHUD.p1 { top: 45px; left: 45px; }
+    .playerHUD.p2 { top: 45px; right: 45px; }
+    .playerHUD.p3 { bottom: 45px; left: 45px; }
+    .playerHUD.p4 { bottom: 45px; right: 45px; }
+}
+
 /* ====== BINTANG DI TILE TIDAK MERUSAK LAYOUT ====== */
 .star {
     position: absolute;
@@ -426,14 +443,6 @@
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-}
-
-main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;   /* INI yang bikin benar² center vertikal */
-    padding: 80px 0;       /* ruang aman dari header dan footer */
 }
   </style>
 
@@ -2885,7 +2894,3 @@ function closeRouletteResult() {
 </script>
 </body>
 </html>
-
-
-
-
